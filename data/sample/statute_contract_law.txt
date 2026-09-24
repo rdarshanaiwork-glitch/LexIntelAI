@@ -1,0 +1,17 @@
+﻿TITLE: Restatement (Second) of Contracts - Section 241 & Section 356
+JURISDICTION: United States Common Law
+DOCUMENT_TYPE: Restatement / Model Statutory Principles
+CITATION: Restat 2d of Contracts, § 241, § 356
+DATE: 1981-01-01
+
+SECTION 241: CIRCUMSTANCES SIGNIFICANT IN DETERMINING WHETHER A FAILURE IS MATERIAL
+In determining whether a failure to render or to offer performance is material, the following circumstances are significant:
+(a) the extent to which the injured party will be deprived of the benefit which he reasonably expected;
+(b) the extent to which the injured party can be adequately compensated for the part of that benefit of which he will be deprived;
+(c) the extent to which the party failing to perform or to offer to perform will suffer forfeiture;
+(d) the likelihood that the party failing to perform or to offer to perform will cure his failure, taking account of all the circumstances including any reasonable assurances;
+(e) the extent to which the behavior of the party failing to perform or to offer to perform comports with standards of good faith and fair dealing.
+
+SECTION 356: LIQUIDATED DAMAGES AND PENALTIES
+(1) Damages for breach by either party may be liquidated in the agreement but only at an amount that is reasonable in the light of the anticipated or actual loss caused by the breach and the difficulties of proof of loss. A term fixing unreasonably large liquidated damages is unenforceable on grounds of public policy as a penalty.
+(2) A term in a bond providing for an amount of money as a penalty for non-occurrence of the condition of the bond is unenforceable on grounds of public policy to the extent that the amount exceeds the loss caused by such non-occurrence.

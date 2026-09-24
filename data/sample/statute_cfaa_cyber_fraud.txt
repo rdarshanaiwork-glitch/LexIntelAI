@@ -1,0 +1,21 @@
+TITLE: Computer Fraud and Abuse Act (CFAA) - Civil Liability Provisions
+JURISDICTION: US Federal
+DOCUMENT_TYPE: Statute
+CITATION: 18 U.S.C. § 1030(a)(2), 1030(g)
+DATE: 1986-10-16 (As Amended)
+
+SECTION 1030(a)(2): INTENTIONAL UNAUTHORIZED ACCESS TO PROTECTED COMPUTERS
+Whoever intentionally accesses a computer without authorization or exceeds authorized access, and thereby obtains:
+(A) information contained in a financial record of a financial institution, or of a card issuer;
+(B) information from any department or agency of the United States; or
+(C) information from any protected computer (including any computer used in or affecting interstate or foreign commerce or communication);
+shall be punished as provided in subsection (c).
+
+SECTION 1030(g): CIVIL RELIEF AND DAMAGES
+Any person who suffers damage or loss by reason of a violation of this section may maintain a civil action against the violator to obtain compensatory damages and injunctive relief or other equitable relief.
+A civil action for a violation of this section may be brought only if the conduct involves 1 of the factors specified in subclauses (I) through (V) of subsection (c)(4)(A)(i), including:
+- loss to 1 or more persons during any 1-year period aggregating at least $5,000 in value;
+- modification or impairment of the medical examination, diagnosis, treatment, or care of 1 or more individuals;
+- physical injury to any person.
+
+Damages for a violation involving only economic losses under clause (I) are limited to economic damages.

@@ -1,0 +1,16 @@
+TITLE: Sarbanes-Oxley Act - Section 806 (Whistleblower Protection)
+JURISDICTION: US Federal
+DOCUMENT_TYPE: Statute
+CITATION: 18 U.S.C. § 1514A
+DATE: 2002-07-30
+
+SECTION 1514A: CIVIL ACTION TO PROTECT AGAINST RETALIATION IN FRAUD CASES
+(a) In General - No company with a class of securities registered under section 12 of the Securities Exchange Act of 1934, or that is required to file reports under section 15(d) of the Securities Exchange Act of 1934, including any contractor, subcontractor, or agent of such company, may discharge, demote, suspend, threaten, harass, or in any other manner discriminate against an employee in the terms and conditions of employment because of any lawful act done by the employee:
+(1) to provide information, cause information to be provided, or otherwise assist in an investigation regarding any conduct which the employee reasonably believes constitutes a violation of section 1341 (mail fraud), 1343 (wire fraud), 1344 (bank fraud), or 1348 (securities fraud), any rule or regulation of the Securities and Exchange Commission, or any provision of Federal law relating to fraud against shareholders, when the information or assistance is provided to:
+  (A) a Federal regulatory or law enforcement agency;
+  (B) any Member of Congress or any committee of Congress; or
+  (C) a person with supervisory authority over the employee.
+
+(b) Enforcement Action - An action brought under subsection (a) shall be governed by the legal burdens of proof set forth in section 42121(b) of title 49.
+(1) Contributing factor standard: The plaintiff must demonstrate by a preponderance of the evidence that protected activity was a contributing factor in the unfavorable personnel action.
+(2) Affirmative Defense: Relief may not be ordered if the employer demonstrates by clear and convincing evidence that the employer would have taken the same unfavorable personnel action in the absence of that behavior.

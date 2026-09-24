@@ -1,0 +1,82 @@
+[
+  {
+    "id": "eval-001",
+    "scenario": "Whistleblower Retaliation",
+    "title": "Vance v. Sterling BioPharm",
+    "jurisdiction": "US Federal",
+    "legal_domain": "Whistleblower Retaliation",
+    "query": "Does Sarbanes-Oxley Act \u00a7 1514A protect outsourced contractor employees from retaliation after reporting FDA trial data manipulation under Lawson v. FMR LLC?",
+    "expected_statutes": [
+      "18 U.S.C. \u00a7 1514A",
+      "statute_whistleblower_sox.txt"
+    ],
+    "expected_precedents": [
+      "Lawson v. FMR LLC",
+      "571 U.S. 429"
+    ],
+    "expected_legal_principles": [
+      "Contractor employee standing under SOX",
+      "Contributing factor causation standard"
+    ],
+    "execution_strategy": "full_litigation"
+  },
+  {
+    "id": "eval-002",
+    "scenario": "Cybersecurity & Computer Misuse",
+    "title": "OmniTech Solutions v. Marcus",
+    "jurisdiction": "US Federal / Northern District of California",
+    "legal_domain": "Cyber Law & Trade Secrets",
+    "query": "Can an employer sustain a civil claim under Computer Fraud and Abuse Act (18 U.S.C. \u00a7 1030) when an employee with valid credentials downloads files in violation of policy, in light of Van Buren v. United States?",
+    "expected_statutes": [
+      "18 U.S.C. \u00a7 1030",
+      "statute_cfaa_cyber_fraud.txt"
+    ],
+    "expected_precedents": [
+      "Van Buren v. United States",
+      "593 U.S. 374"
+    ],
+    "expected_legal_principles": [
+      "Gates-up vs gates-down technological access model",
+      "CFAA does not penalize policy violations where credentials valid"
+    ],
+    "execution_strategy": "full_litigation"
+  },
+  {
+    "id": "eval-003",
+    "scenario": "Commercial Breach of Contract",
+    "title": "Apex Logistics Corp. v. Horizon Retail",
+    "jurisdiction": "Common Law",
+    "legal_domain": "Contracts",
+    "query": "Is a contractual liquidated damages clause of ,000/day per delayed linehaul truck enforceable under Restatement (Second) of Contracts \u00a7 356, and can lost goodwill of ,000 be recovered under Hadley v. Baxendale?",
+    "expected_statutes": [
+      "Restatement (Second) of Contracts \u00a7 356",
+      "statute_contract_law.txt"
+    ],
+    "expected_precedents": [
+      "Hadley v. Baxendale",
+      "1854 9 Exch 341"
+    ],
+    "expected_legal_principles": [
+      "Unenforceable penalty doctrine",
+      "Foreseeability rule for consequential lost profits"
+    ],
+    "execution_strategy": "full_litigation"
+  },
+  {
+    "id": "eval-004",
+    "scenario": "SOX Retaliation Filing Dispute",
+    "title": "SOX Limitation Period Inquiry",
+    "jurisdiction": "US Federal",
+    "legal_domain": "Statutory Law",
+    "query": "Assess the filing-timing issue for a Sarbanes-Oxley \u00a7 1514A retaliation claim, identify the administrative deadline, and analyze how a timeliness defense could affect the claimant\u2019s litigation position.",
+    "expected_statutes": [
+      "18 U.S.C. \u00a7 1514A",
+      "statute_whistleblower_sox.txt"
+    ],
+    "expected_precedents": [],
+    "expected_legal_principles": [
+      "180-day administrative filing requirement with OSHA"
+    ],
+    "execution_strategy": "full_litigation"
+  }
+]
