@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-24 07:57:50 UTC",
+  "timestamp": "2026-09-27 13:52:44 UTC",
   "architecture": {
     "agent_count": 4,
     "agents": [
@@ -17,16 +17,16 @@
   "task_solve_rate": 1.0,
   "self_termination_rate": 1.0,
   "trajectory_quality": 1.0,
-  "retrieval_precision": 0.803,
+  "retrieval_precision": 0.689,
   "retrieval_recall": 0.875,
-  "retrieval_f1": 0.824,
+  "retrieval_f1": 0.758,
   "citation_validity_rate": 1.0,
   "citation_grounding_rate": 0.958,
-  "average_latency_ms": 60217,
-  "average_llm_calls": 12.0,
-  "average_tool_calls": 2.2,
+  "average_latency_ms": 112120,
+  "average_llm_calls": 13.8,
+  "average_tool_calls": 2.8,
   "average_revisions": 0.0,
-  "average_research_sufficiency": 0.75,
+  "average_research_sufficiency": 0.805,
   "agent_reliability": {
     "CaseIntakeAgent": {
       "executions": 4,
@@ -60,159 +60,7 @@
       "scenario": "Whistleblower Retaliation",
       "strategy": "full_litigation",
       "status": "completed",
-      "latency_ms": 32057,
-      "routing": {
-        "expected_path": [
-          "CaseIntakeAgent",
-          "LegalResearchAgent",
-          "AdvocateAgent",
-          "AdjudicatorReportingAgent"
-        ],
-        "observed_path": [
-          "CaseIntakeAgent",
-          "LegalResearchAgent",
-          "AdvocateAgent",
-          "AdjudicatorReportingAgent"
-        ],
-        "requirements_met_independent": 1.0,
-        "requirements_met_dependency_aware": 1.0
-      },
-      "retrieval": {
-        "retrieved": 6,
-        "expected": 4,
-        "matched": 4,
-        "precision": 0.833,
-        "recall": 1.0,
-        "f1": 0.909
-      },
-      "evidence": {
-        "citation_count": 6,
-        "audited_count": 3,
-        "citation_validity": 1.0,
-        "citation_grounding": 1.0,
-        "invalid_citations": 0
-      },
-      "trajectory": {
-        "steps": 4,
-        "completed_steps": 4,
-        "failed_steps": 0,
-        "revisions": 0,
-        "self_termination": 1.0,
-        "task_solve_rate": 1.0,
-        "trajectory_quality": 1.0
-      },
-      "run_metrics": {
-        "task_solve_rate": 1.0,
-        "requirements_met_independent": 1.0,
-        "requirements_met_dependency_aware": 1.0,
-        "self_termination": 1.0,
-        "trajectory_quality": 1.0,
-        "evidence_coverage": 0.85,
-        "evidence_alignment": 1.0,
-        "authority_coverage": 0.333,
-        "citation_validity": 1.0,
-        "citation_coverage": 1.0,
-        "jurisdiction_match": 1.0,
-        "argument_survival": 1.0,
-        "research_sufficiency": 0.778,
-        "total_steps": 4,
-        "llm_calls": 10,
-        "tool_calls": 2,
-        "retries": 0,
-        "latency_ms": 28366,
-        "revision_count": 0,
-        "metric_notes": [
-          "Vance v. Sterling BioPharm: Evaluated 3 core legal issues against factual record.",
-          "Autonomous search retrieved 6 authority chunks with token-verified jurisdiction alignment.",
-          "Mechanical citation audit completed across 3 legal authorities (3/3 verified).",
-          "Dialectical self-play stress-test yielded survivable severity with survival factor 1.0."
-        ]
-      },
-      "verdict": "PASS"
-    },
-    {
-      "id": "eval-002",
-      "title": "OmniTech Solutions v. Marcus",
-      "scenario": "Cybersecurity & Computer Misuse",
-      "strategy": "full_litigation",
-      "status": "completed",
-      "latency_ms": 79340,
-      "routing": {
-        "expected_path": [
-          "CaseIntakeAgent",
-          "LegalResearchAgent",
-          "AdvocateAgent",
-          "AdjudicatorReportingAgent"
-        ],
-        "observed_path": [
-          "CaseIntakeAgent",
-          "LegalResearchAgent",
-          "AdvocateAgent",
-          "AdjudicatorReportingAgent"
-        ],
-        "requirements_met_independent": 1.0,
-        "requirements_met_dependency_aware": 1.0
-      },
-      "retrieval": {
-        "retrieved": 5,
-        "expected": 4,
-        "matched": 4,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
-      },
-      "evidence": {
-        "citation_count": 5,
-        "audited_count": 2,
-        "citation_validity": 1.0,
-        "citation_grounding": 1.0,
-        "invalid_citations": 0
-      },
-      "trajectory": {
-        "steps": 4,
-        "completed_steps": 4,
-        "failed_steps": 0,
-        "revisions": 0,
-        "self_termination": 1.0,
-        "task_solve_rate": 1.0,
-        "trajectory_quality": 1.0
-      },
-      "run_metrics": {
-        "task_solve_rate": 1.0,
-        "requirements_met_independent": 1.0,
-        "requirements_met_dependency_aware": 1.0,
-        "self_termination": 1.0,
-        "trajectory_quality": 1.0,
-        "evidence_coverage": 0.85,
-        "evidence_alignment": 1.0,
-        "authority_coverage": 0.5,
-        "citation_validity": 1.0,
-        "citation_coverage": 1.0,
-        "jurisdiction_match": 1.0,
-        "argument_survival": 1.0,
-        "research_sufficiency": 0.833,
-        "total_steps": 4,
-        "llm_calls": 11,
-        "tool_calls": 2,
-        "retries": 1,
-        "latency_ms": 75709,
-        "revision_count": 0,
-        "metric_notes": [
-          "OmniTech Solutions v. Marcus: Evaluated 2 core legal issues against factual record.",
-          "Autonomous search retrieved 5 authority chunks with token-verified jurisdiction alignment.",
-          "Mechanical citation audit completed across 2 legal authorities (2/2 verified).",
-          "Dialectical self-play stress-test yielded survivable severity with survival factor 1.0."
-        ]
-      },
-      "verdict": "PASS"
-    },
-    {
-      "id": "eval-003",
-      "title": "Apex Logistics Corp. v. Horizon Retail",
-      "scenario": "Commercial Breach of Contract",
-      "strategy": "full_litigation",
-      "status": "completed",
-      "latency_ms": 40040,
+      "latency_ms": 192516,
       "routing": {
         "expected_path": [
           "CaseIntakeAgent",
@@ -232,10 +80,10 @@
       "retrieval": {
         "retrieved": 7,
         "expected": 4,
-        "matched": 2,
-        "precision": 0.714,
-        "recall": 0.5,
-        "f1": 0.588
+        "matched": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
       },
       "evidence": {
         "citation_count": 7,
@@ -258,26 +106,178 @@
         "requirements_met_independent": 1.0,
         "requirements_met_dependency_aware": 1.0,
         "self_termination": 1.0,
+        "trajectory_quality": 0.9,
+        "evidence_coverage": 0.85,
+        "evidence_alignment": 1.0,
+        "authority_coverage": 0.667,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "jurisdiction_match": 1.0,
+        "argument_survival": 0.5,
+        "research_sufficiency": 0.889,
+        "total_steps": 4,
+        "llm_calls": 16,
+        "tool_calls": 3,
+        "retries": 3,
+        "latency_ms": 188880,
+        "revision_count": 0,
+        "metric_notes": [
+          "Vance v. Sterling BioPharm: Evaluated 3 core legal issues against factual record.",
+          "Autonomous search retrieved 7 authority chunks with token-verified jurisdiction alignment.",
+          "Mechanical citation audit completed across 2 legal authorities (2/2 verified).",
+          "Dialectical self-play stress-test yielded significant severity with survival factor 0.5."
+        ]
+      },
+      "verdict": "PASS"
+    },
+    {
+      "id": "eval-002",
+      "title": "OmniTech Solutions v. Marcus",
+      "scenario": "Cybersecurity & Computer Misuse",
+      "strategy": "full_litigation",
+      "status": "completed",
+      "latency_ms": 127153,
+      "routing": {
+        "expected_path": [
+          "CaseIntakeAgent",
+          "LegalResearchAgent",
+          "AdvocateAgent",
+          "AdjudicatorReportingAgent"
+        ],
+        "observed_path": [
+          "CaseIntakeAgent",
+          "LegalResearchAgent",
+          "AdvocateAgent",
+          "AdjudicatorReportingAgent"
+        ],
+        "requirements_met_independent": 1.0,
+        "requirements_met_dependency_aware": 1.0
+      },
+      "retrieval": {
+        "retrieved": 5,
+        "expected": 4,
+        "matched": 4,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.889
+      },
+      "evidence": {
+        "citation_count": 5,
+        "audited_count": 3,
+        "citation_validity": 1.0,
+        "citation_grounding": 1.0,
+        "invalid_citations": 0
+      },
+      "trajectory": {
+        "steps": 4,
+        "completed_steps": 4,
+        "failed_steps": 0,
+        "revisions": 0,
+        "self_termination": 1.0,
+        "task_solve_rate": 1.0,
+        "trajectory_quality": 1.0
+      },
+      "run_metrics": {
+        "task_solve_rate": 1.0,
+        "requirements_met_independent": 1.0,
+        "requirements_met_dependency_aware": 1.0,
+        "self_termination": 1.0,
         "trajectory_quality": 1.0,
         "evidence_coverage": 0.85,
         "evidence_alignment": 1.0,
-        "authority_coverage": 0.5,
+        "authority_coverage": 1.0,
         "citation_validity": 1.0,
         "citation_coverage": 1.0,
         "jurisdiction_match": 1.0,
         "argument_survival": 1.0,
-        "research_sufficiency": 0.833,
+        "research_sufficiency": 1.0,
+        "total_steps": 4,
+        "llm_calls": 12,
+        "tool_calls": 2,
+        "retries": 2,
+        "latency_ms": 123542,
+        "revision_count": 0,
+        "metric_notes": [
+          "OmniTech Solutions v. Marcus: Evaluated 1 core legal issues against factual record.",
+          "Autonomous search retrieved 5 authority chunks with token-verified jurisdiction alignment.",
+          "Mechanical citation audit completed across 3 legal authorities (3/3 verified).",
+          "Dialectical self-play stress-test yielded survivable severity with survival factor 1.0."
+        ]
+      },
+      "verdict": "PASS"
+    },
+    {
+      "id": "eval-003",
+      "title": "Apex Logistics Corp. v. Horizon Retail",
+      "scenario": "Commercial Breach of Contract",
+      "strategy": "full_litigation",
+      "status": "completed",
+      "latency_ms": 51202,
+      "routing": {
+        "expected_path": [
+          "CaseIntakeAgent",
+          "LegalResearchAgent",
+          "AdvocateAgent",
+          "AdjudicatorReportingAgent"
+        ],
+        "observed_path": [
+          "CaseIntakeAgent",
+          "LegalResearchAgent",
+          "AdvocateAgent",
+          "AdjudicatorReportingAgent"
+        ],
+        "requirements_met_independent": 1.0,
+        "requirements_met_dependency_aware": 1.0
+      },
+      "retrieval": {
+        "retrieved": 11,
+        "expected": 4,
+        "matched": 2,
+        "precision": 0.455,
+        "recall": 0.5,
+        "f1": 0.476
+      },
+      "evidence": {
+        "citation_count": 11,
+        "audited_count": 2,
+        "citation_validity": 1.0,
+        "citation_grounding": 1.0,
+        "invalid_citations": 0
+      },
+      "trajectory": {
+        "steps": 4,
+        "completed_steps": 4,
+        "failed_steps": 0,
+        "revisions": 0,
+        "self_termination": 1.0,
+        "task_solve_rate": 1.0,
+        "trajectory_quality": 1.0
+      },
+      "run_metrics": {
+        "task_solve_rate": 1.0,
+        "requirements_met_independent": 1.0,
+        "requirements_met_dependency_aware": 1.0,
+        "self_termination": 1.0,
+        "trajectory_quality": 0.9,
+        "evidence_coverage": 0.85,
+        "evidence_alignment": 1.0,
+        "authority_coverage": 0.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "jurisdiction_match": 1.0,
+        "argument_survival": 0.5,
+        "research_sufficiency": 0.667,
         "total_steps": 4,
         "llm_calls": 13,
-        "tool_calls": 2,
+        "tool_calls": 3,
         "retries": 0,
-        "latency_ms": 36419,
+        "latency_ms": 47569,
         "revision_count": 0,
         "metric_notes": [
           "Apex Logistics Corp. v. Horizon Retail: Evaluated 2 core legal issues against factual record.",
-          "Autonomous search retrieved 7 authority chunks with token-verified jurisdiction alignment.",
+          "Autonomous search retrieved 11 authority chunks with token-verified jurisdiction alignment.",
           "Mechanical citation audit completed across 2 legal authorities (2/2 verified).",
-          "Dialectical self-play stress-test yielded survivable severity with survival factor 1.0."
+          "Dialectical self-play stress-test yielded significant severity with survival factor 0.5."
         ]
       },
       "verdict": "PASS"
@@ -288,7 +288,7 @@
       "scenario": "SOX Retaliation Filing Dispute",
       "strategy": "full_litigation",
       "status": "completed",
-      "latency_ms": 89432,
+      "latency_ms": 77609,
       "routing": {
         "expected_path": [
           "CaseIntakeAgent",
@@ -309,9 +309,9 @@
         "retrieved": 6,
         "expected": 2,
         "matched": 2,
-        "precision": 0.667,
+        "precision": 0.5,
         "recall": 1.0,
-        "f1": 0.8
+        "f1": 0.667
       },
       "evidence": {
         "citation_count": 6,
@@ -337,20 +337,20 @@
         "trajectory_quality": 0.9,
         "evidence_coverage": 0.85,
         "evidence_alignment": 1.0,
-        "authority_coverage": 0.0,
+        "authority_coverage": 0.333,
         "citation_validity": 1.0,
         "citation_coverage": 0.833,
         "jurisdiction_match": 0.833,
         "argument_survival": 0.5,
-        "research_sufficiency": 0.555,
+        "research_sufficiency": 0.666,
         "total_steps": 4,
         "llm_calls": 14,
         "tool_calls": 3,
-        "retries": 1,
-        "latency_ms": 85807,
+        "retries": 0,
+        "latency_ms": 73988,
         "revision_count": 0,
         "metric_notes": [
-          "SOX Limitation Period Inquiry: Evaluated 2 core legal issues against factual record.",
+          "SOX Limitation Period Inquiry: Evaluated 3 core legal issues against factual record.",
           "Autonomous search retrieved 6 authority chunks with token-verified jurisdiction alignment.",
           "Mechanical citation audit completed across 3 legal authorities (3/3 verified).",
           "Dialectical self-play stress-test yielded significant severity with survival factor 0.5."
@@ -359,5 +359,5 @@
       "verdict": "PASS"
     }
   ],
-  "total_evaluation_time_seconds": 240.87
+  "total_evaluation_time_seconds": 448.48
 }

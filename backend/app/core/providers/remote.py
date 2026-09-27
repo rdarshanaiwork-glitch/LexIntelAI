@@ -396,19 +396,19 @@ class GroqLLMProvider(BaseLLMProvider):
             raise
 
 class GeminiLLMProvider(BaseLLMProvider):
-    """Production provider using Google Gemini Flash-Lite (gemini-flash-lite-latest).
+    """Production provider using Google Gemini Flash-Lite (gemini-3.1-flash-lite).
 
     Features:
     - High-throughput, low-latency agent execution
     - Native responseMimeType: application/json support
-    - Model rotation across Gemini Lite models (flash-lite-latest, 3.5-flash-lite, 3.1-flash-lite) to avoid 429 rate limits
+    - Model rotation across active Gemini Lite/Flash models (3.1-flash-lite, flash-latest, 3.1-flash-lite-preview, 3.6-flash) to avoid 429 rate limits or timeouts
     """
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         super().__init__()
         self.api_key = api_key if api_key is not None else settings.GEMINI_API_KEY
-        raw_model = model or settings.LLM_MODEL or "gemini-flash-lite-latest"
-        if raw_model in ("default", "gemini", "gemini-flash", "gemini-1.5-flash", "gemini-2.5-flash", "openai/gpt-oss-20b", "openai/gpt-oss-120b", "gemini-3.6-flash"):
-            raw_model = "gemini-flash-lite-latest"
+        raw_model = model or settings.LLM_MODEL or "gemini-3.1-flash-lite"
+        if raw_model in ("default", "gemini", "gemini-flash", "gemini-1.5-flash", "gemini-2.5-flash"):
+            raw_model = "gemini-3.1-flash-lite"
         self.model = raw_model
         self.base_url = "https://generativelanguage.googleapis.com/v1beta/models"
         self._client = httpx.Client(timeout=settings.LLM_TIMEOUT_SECONDS)
@@ -420,8 +420,8 @@ class GeminiLLMProvider(BaseLLMProvider):
         backoff = 1.5
         current_model = self.model
 
-        # Rotation models on Gemini Lite
-        lite_models = ["gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]
+        # Rotation models on Gemini Lite: use models verified active and responsive
+        lite_models = ["gemini-3.1-flash-lite", "gemini-flash-latest", "gemini-3.1-flash-lite-preview", "gemini-3.6-flash"]
 
         for attempt in range(1, retries + 1):
             started = time.time()
@@ -460,14 +460,38 @@ class GeminiLLMProvider(BaseLLMProvider):
             except httpx.HTTPStatusError as exc:
                 if exc.response.status_code in (429, 503) and attempt < retries:
                     self.telemetry["retries"] += 1
+                    next_idx = (lite_models.index(current_model) + 1) % len(lite_models) if current_model in lite_models else 0
+                    alt_model = lite_models[next_idx]
+                    logger.warning(
+                        "Gemini HTTP %s on %s; rotating to %s (attempt %s/%s)",
+                        exc.response.status_code,
+                        current_model,
+                        alt_model,
+                        attempt,
+                        retries,
+                    )
+                    current_model = alt_model
+                    self.model = alt_model
                     time.sleep(min(backoff, 4.0))
                     backoff = min(backoff * 1.5, 4.0)
                     continue
                 logger.error("Gemini HTTP error %s: %s", exc.response.status_code, exc.response.text)
                 raise
-            except Exception:
+            except Exception as exc:
                 if attempt < retries:
                     self.telemetry["retries"] += 1
+                    next_idx = (lite_models.index(current_model) + 1) % len(lite_models) if current_model in lite_models else 0
+                    alt_model = lite_models[next_idx]
+                    logger.warning(
+                        "Gemini exception '%s' on %s; rotating to %s (attempt %s/%s)",
+                        exc,
+                        current_model,
+                        alt_model,
+                        attempt,
+                        retries,
+                    )
+                    current_model = alt_model
+                    self.model = alt_model
                     time.sleep(min(backoff, 4.0))
                     backoff = min(backoff * 1.5, 4.0)
                     continue

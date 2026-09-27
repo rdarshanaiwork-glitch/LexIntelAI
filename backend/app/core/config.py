@@ -24,13 +24,13 @@ class Settings(BaseSettings):
 
     # LLM Settings
     LLM_PROVIDER: str = "gemini"  # primary provider: Google Gemini
-    LLM_MODEL: str = "gemini-flash-lite-latest"
+    LLM_MODEL: str = "gemini-3.1-flash-lite"
     LLM_TEMPERATURE: float = 0.2
     GEMINI_THINKING_LEVEL: str = "low"  # low for speed; medium for difficult adjudication
     # A real-model failure must remain visible; mock output is opt-in only.
     ALLOW_MOCK_FALLBACK: bool = False
     LLM_MAX_RETRIES: int = 1
-    LLM_TIMEOUT_SECONDS: float = 45.0
+    LLM_TIMEOUT_SECONDS: float = 35.0
     MAX_REVISIONS: int = 0
 
     # Providers

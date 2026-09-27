@@ -14,11 +14,9 @@ from app.core.providers.remote import GeminiLLMProvider, GroqLLMProvider
 logger = logging.getLogger("lexintel.graph")
 
 def _build_agents():
-    # Pure Gemini Architecture:
-    # All 4 agents use Gemini Flash-Lite (gemini-flash-lite-latest),
-    # which has high RPM/TPM limits, lowest latency, and avoids 429/503 errors.
-    gemini_provider = GeminiLLMProvider(model="gemini-flash-lite-latest")
-    logger.info("Initializing All Agents with Pure Gemini Flash-Lite (gemini-flash-lite-latest)")
+    model = settings.LLM_MODEL or "gemini-3.1-flash-lite"
+    gemini_provider = GeminiLLMProvider(model=model)
+    logger.info("Initializing All Agents with Gemini Provider (%s)", model)
     return (
         CaseIntakeAgent(llm_provider=gemini_provider),
         LegalResearchAgent(llm_provider=gemini_provider),
@@ -222,7 +220,7 @@ def route_after_adjudicator(state: LegalWorkflowState) -> Literal["case_intake",
     target = state.get("retrying_agent")
     iteration = int(state.get("iteration_count", 0))
     max_revisions = int(state.get("max_revisions", getattr(settings, "MAX_REVISIONS", 0)))
-    if verdict == "REVISE" and target and iteration < max_revisions:
+    if verdict == "REVISE" and target and iteration <= max_revisions:
         return target if target in {"case_intake", "legal_research", "advocate"} else "legal_research"
     return "end"
 

@@ -108,20 +108,43 @@ export const ResearchProgressPage: React.FC<ResearchProgressPageProps> = ({
             </div>
             <span className="text-[10px] font-mono text-cyan-300">DYNAMIC / RUN-SPECIFIC</span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {[
-              ['Solve', 'task_solve_rate'], ['Req(D)', 'requirements_met_dependency_aware'], ['Self-stop', 'self_termination'],
-              ['Evidence', 'evidence_coverage'], ['Alignment', 'evidence_alignment'], ['Authority', 'authority_coverage'],
-              ['Citations', 'citation_validity'], ['Research', 'research_sufficiency']
-            ].map(([label,key]) => { const v=(session.state_snapshot?.run_evaluation as any)?.[key]; return <div key={key} className="p-2.5 rounded-lg bg-slate-950 border border-slate-800"><div className="text-[9px] text-slate-500">{label}</div><div className="text-sm font-bold text-cyan-300 mt-1">{typeof v === 'number' ? `${(v*100).toFixed(0)}%` : 'N/A'}</div></div> })}
+              ['Trajectory Quality', 'trajectory_quality'],
+              ['Evidence Coverage', 'evidence_coverage'],
+              ['Evidence Grounding', 'evidence_alignment'],
+              ['Authority Coverage', 'authority_coverage'],
+              ['Research Sufficiency', 'research_sufficiency'],
+              ['Citation Validity', 'citation_validity']
+            ].map(([label,key]) => {
+              const v = (session.state_snapshot?.run_evaluation as any)?.[key];
+              return (
+                <div key={key} className="p-3 rounded-lg bg-slate-950 border border-slate-800">
+                  <div className="text-[10px] text-slate-400 font-medium">{label}</div>
+                  <div className="text-base font-bold text-cyan-300 mt-1">
+                    {typeof v === 'number' ? `${(v * 100).toFixed(0)}%` : 'N/A'}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div className="flex flex-wrap gap-4 mt-3 text-[10px] text-slate-400">
-            <span>Steps: {(session.state_snapshot?.run_evaluation as any)?.total_steps ?? 0}</span>
-            <span>LLM calls: {(session.state_snapshot?.run_evaluation as any)?.llm_calls ?? 0}</span>
-            <span>Tool calls: {(session.state_snapshot?.run_evaluation as any)?.tool_calls ?? 0}</span>
-            <span>Retries: {(session.state_snapshot?.run_evaluation as any)?.retries ?? 0}</span>
-            <span>Latency: {(session.state_snapshot?.run_evaluation as any)?.latency_ms ?? 0} ms</span>
-            <span>Revisions: {(session.state_snapshot?.run_evaluation as any)?.revision_count ?? 0}</span>
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-3 pt-3 border-t border-slate-800/60 text-[10px] text-slate-400">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Graph Integrity: {(session.state_snapshot?.run_evaluation as any)?.task_solve_rate === 1.0 ? 'Topological Sequence Passed (4/4)' : 'Partial'}
+              </span>
+              <span>•</span>
+              <span>Self-Termination: {(session.state_snapshot?.run_evaluation as any)?.self_termination === 1.0 ? 'Graceful' : 'Timeout'}</span>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <span>Steps: {(session.state_snapshot?.run_evaluation as any)?.total_steps ?? 0}</span>
+              <span>LLM calls: {(session.state_snapshot?.run_evaluation as any)?.llm_calls ?? 0}</span>
+              <span>Tool calls: {(session.state_snapshot?.run_evaluation as any)?.tool_calls ?? 0}</span>
+              <span>Retries: {(session.state_snapshot?.run_evaluation as any)?.retries ?? 0}</span>
+              <span>Latency: {((session.state_snapshot?.run_evaluation as any)?.latency_ms ?? 0) > 0 ? `${(((session.state_snapshot?.run_evaluation as any)?.latency_ms ?? 0) / 1000).toFixed(1)}s` : '0s'}</span>
+              <span>Revisions: {(session.state_snapshot?.run_evaluation as any)?.revision_count ?? 0}</span>
+            </div>
           </div>
         </div>
       )}

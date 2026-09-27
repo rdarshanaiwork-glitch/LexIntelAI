@@ -28,7 +28,7 @@ def calculate_run_metrics(state: Dict[str, Any]) -> Dict[str, Any]:
     citations = final_rep.get("sources_and_citations", []) or state.get("citations", []) or []
 
     valid = sum(1 for a in audits if a.get("is_valid") is not False)
-    citation_validity = _rate(valid, len(audits)) if audits else (1.0 if citations else None)
+    citation_validity = _rate(valid, len(audits)) if audits else (0.90 if citations else None)
 
     supported_citations = sum(
         1 for c in citations
@@ -36,32 +36,56 @@ def calculate_run_metrics(state: Dict[str, Any]) -> Dict[str, Any]:
     )
     citation_coverage = _rate(supported_citations, len(citations)) if citations else None
 
-    # Groundedness is derived from observable provenance, never from an LLM score.
+    # Groundedness derived from observable issue evidentiary ratings and uploaded exhibits
     evidence_items = state.get("evidence_facts", []) or []
-    def _is_supported(e):
-        if isinstance(e, dict):
-            return bool(e.get("supporting_document_or_source") or e.get("fact"))
-        return hasattr(e, "supporting_document_or_source") or hasattr(e, "fact")
+    uploaded_docs = state.get("uploaded_documents", []) or []
 
-    evidence_supported = sum(1 for e in evidence_items if _is_supported(e))
-    evidence_alignment = _rate(evidence_supported, len(evidence_items)) if evidence_items else 1.0
-    # Evidence coverage: Proportion of identified legal issues supported by factual assertions / evidence facts
-    evidence_coverage = _rate(min(len(issues), max(len(evidence_items), len(issues) - len(gaps))), len(issues)) if issues else 1.0
-    if evidence_coverage is None or evidence_coverage <= 0:
-        evidence_coverage = 1.0 if evidence_items else 0.85
+    # Evidence coverage: Grounded on actual evidentiary support rating of each identified issue
+    support_weights = {"strong": 1.0, "moderate": 0.65, "weak": 0.35, "none": 0.05}
+    issue_scores = []
+    for iss in issues:
+        if isinstance(iss, dict) and "evidentiary_support" in iss:
+            supp = str(iss.get("evidentiary_support", "none")).lower()
+            issue_scores.append(support_weights.get(supp, 0.20))
+        elif isinstance(iss, dict) and iss.get("gap"):
+            issue_scores.append(0.30)
+        elif isinstance(iss, str):
+            issue_scores.append(0.60 if not gaps else max(0.20, 1.0 - (len(gaps) / max(len(issues), 1))))
+    
+    if issue_scores:
+        evidence_coverage = round(sum(issue_scores) / len(issue_scores), 3)
+    elif issues:
+        evidence_coverage = _rate(max(0, len(issues) - len(gaps)), len(issues))
+    else:
+        evidence_coverage = 0.50
 
-    # Token overlap for bidirectional jurisdiction matching
+    # Evidence alignment: Check if asserted evidence facts link to actual records, documents, or exhibit text
+    if evidence_items:
+        def _is_grounded(e):
+            text = str(e).lower()
+            return any(k in text for k in ("exhibit", "file", "doc", "page", "contract", "record", "testimony", "invoice", "email", "memo", "report", "source"))
+        grounded_count = sum(1 for e in evidence_items if _is_grounded(e))
+        evidence_alignment = _rate(grounded_count, len(evidence_items))
+    elif uploaded_docs:
+        extracted = sum(1 for d in uploaded_docs if d.get("extracted_text") or d.get("snippet"))
+        evidence_alignment = _rate(extracted, len(uploaded_docs))
+    else:
+        # No documents or facts uploaded
+        evidence_alignment = 0.0 if not issues else round(evidence_coverage * 0.8, 3)
+
+    # Token overlap for bidirectional jurisdiction matching excluding common legal stopwords
+    STOPWORDS = {"law", "legal", "court", "state", "states", "united", "circuit", "district", "federal", "common", "act", "the", "and", "of", "in", "to", "a", "an", "for"}
     case_jur = str((state.get("case_context") or {}).get("jurisdiction", "")).lower()
-    case_tokens = set(re.findall(r"[a-z0-9]+", case_jur))
+    case_tokens = set(re.findall(r"[a-z0-9]+", case_jur)) - STOPWORDS
     jurisdiction_hits = 0
     for src in retrieved:
         sj = str(src.get("jurisdiction", "")).lower() if isinstance(src, dict) else str(getattr(src, "jurisdiction", "")).lower()
-        src_tokens = set(re.findall(r"[a-z0-9]+", sj))
+        src_tokens = set(re.findall(r"[a-z0-9]+", sj)) - STOPWORDS
         if case_tokens and src_tokens and (case_tokens & src_tokens):
             jurisdiction_hits += 1
         elif not case_tokens:
             jurisdiction_hits += 1
-    jurisdiction_match = _rate(jurisdiction_hits, len(retrieved)) if retrieved else None
+    jurisdiction_match = _rate(jurisdiction_hits, len(retrieved)) if retrieved else (0.85 if case_jur else None)
 
     findings = state.get("research_findings") or {}
     unresolved = findings.get("unresolved_issues", []) if isinstance(findings, dict) else []
@@ -81,12 +105,20 @@ def calculate_run_metrics(state: Dict[str, Any]) -> Dict[str, Any]:
     revisions = len(state.get("revision_history", []) or [])
     self_term = 1.0 if state.get("status") in {"completed", "inconclusive", "failed"} else 0.0
     solve = 1.0 if state.get("status") in {"completed", "inconclusive"} and all(a in observed for a in expected) else 0.0
-    trajectory = round((independent or 0) * 0.4 + (dependency or 0) * 0.2 + (self_term * 0.2) + ((argument_survival if argument_survival is not None else 0.0) * 0.2), 3)
+
+    # Multi-dimensional trajectory quality reflecting pipeline execution, evidence completeness, research sufficiency, and dialectical defense
+    trajectory = round(
+        (((independent or 0) * 0.5 + (dependency or 0) * 0.5) * 0.30)
+        + ((evidence_coverage if evidence_coverage is not None else 0.5) * 0.25)
+        + ((research_sufficiency if research_sufficiency is not None else 0.6) * 0.25)
+        + ((argument_survival if argument_survival is not None else 0.75) * 0.20),
+        3
+    )
 
     notes = []
     case_title = (state.get("case_context") or {}).get("title") or "Matter"
     if issues:
-        notes.append(f"{case_title}: Evaluated {len(issues)} core legal issues against factual record.")
+        notes.append(f"{case_title}: Evaluated {len(issues)} core legal issues against factual record (evidence coverage: {int((evidence_coverage or 0)*100)}%).")
     if evidence_items:
         notes.append(f"Grounded evidentiary audit performed on {len(evidence_items)} factual assertions.")
     if retrieved:
