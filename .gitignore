@@ -10,6 +10,8 @@ __pycache__/
 *.pyo
 frontend/node_modules/
 node_modules/
+frontend/.vite/
+.vite/
 frontend/dist/
 dist/
 build/
